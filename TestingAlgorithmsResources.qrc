@@ -1,0 +1,26 @@
+<RCC>
+    <!--Main QML startup file -->
+    <qresource prefix="/MainFilePath">
+    <file alias="main.qml">ui/main.qml</file>
+    </qresource>
+
+    <!--QML Components -->
+    <qresource>
+    <file>ui/Components/MainTabView.qml</file>
+    <file>ui/Components/SingleGraphPage.qml</file>
+    <file>ui/Components/DeepTestingPage.qml</file>
+    <file>ui/Components/PanelsSplitter.qml</file>
+    <file>ui/Components/GraphPropertiesPanel.qml</file>
+    <file>ui/Components/AlgorithmTestPanel.qml</file>
+    <file>ui/Components/CreateGraphTabView.qml</file>
+    <file>ui/Components/GraphsListVisualModel.qml</file>
+    <file>ui/Components/MatrixView.qml</file>
+    <file>ui/Components/AdjacencyMatrixView.qml</file>
+    <file>ui/Components/AdjacencyMatrixWindow.qml</file>
+    <file>ui/Components/AdjacencyMatrixToolBar.qml</file>
+    <file>ui/Components/CloseButton.qml</file>
+    <file>ui/Components/CustomButton.qml</file>
+    <file>ui/Components/TabWidget.qml</file>
+    <file>ui/Components/DropDownComboBox.qml</file>
+    </qresource>
+</RCC>
