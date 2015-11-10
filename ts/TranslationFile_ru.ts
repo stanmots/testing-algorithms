@@ -335,16 +335,6 @@
 <context>
     <name>DropDownComboBox</name>
     <message>
-        <location filename="../ui/Components/DropDownComboBox.qml" line="11"/>
-        <source>Method of deleting vertices with a max degree</source>
-        <translation>Метод удаления вершин с максимальной степенью</translation>
-    </message>
-    <message>
-        <location filename="../ui/Components/DropDownComboBox.qml" line="8"/>
-        <source>Method of the unwarranted prediction</source>
-        <translation>Метод негарантированного прогнозирования</translation>
-    </message>
-    <message>
         <location filename="../ui/Components/DropDownComboBox.qml" line="6"/>
         <source>Method with searching the shortest path</source>
         <translation>Метод с поиском кратчайшего пути</translation>
@@ -361,6 +351,16 @@
     </message>
     <message>
         <location filename="../ui/Components/DropDownComboBox.qml" line="10"/>
+        <source>Method with guaranteed predictions</source>
+        <translation>Метод на основе гарантированного прогнозирования</translation>
+    </message>
+    <message>
+        <location filename="../ui/Components/DropDownComboBox.qml" line="11"/>
+        <source>Greedy algorithm (deleting vertices with the max degree)</source>
+        <translation>Жадный алгоритм (удаление вершин с максимальной степенью)</translation>
+    </message>
+    <message>
+        <location filename="../ui/Components/DropDownComboBox.qml" line="8"/>
         <source>Optimized method with the heuristic prediction</source>
         <translation>Оптимизированный метод на основе эвристического прогнозирования</translation>
     </message>
