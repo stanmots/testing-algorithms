@@ -4,10 +4,12 @@
 
 namespace graphsalgs {
 
+std::vector<std::pair<int, int> > getHeuristicCriteria(const UndirectedGraphType& graph);
+
 QList<int> findMVCWithCoveringPairsMethod(UndirectedGraphType graph) {
 
     QList<int> mvc;
-    UndirectedGraphType baseGraph = graph;
+    std::vector<std::pair<int, int> > heuristicCriteria = getHeuristicCriteria(graph);
 
     AlgorithmPropertiesSingleton::getInstance().getNumbeOfOperationsRef() = 0;
 
@@ -95,10 +97,9 @@ QList<int> findMVCWithCoveringPairsMethod(UndirectedGraphType graph) {
 
         /*[5] choose the correct max pair from the found list */
         CoveringPairHolder maxPair;
+        maxPair = maxPairs.at(0);
 
         if(maxPairs.size() == 1) {
-
-            maxPair = maxPairs.at(0);
 
             AlgorithmPropertiesSingleton::getInstance().getAlgStepsRef().append("\r\n" + kPairsWithSameMaxDegreeStr +
                                                                                 QString::number(maxPairs.at(0).getCoverintPair().first + 1) + " " +
@@ -132,8 +133,8 @@ QList<int> findMVCWithCoveringPairsMethod(UndirectedGraphType graph) {
         /*[6] multiply graph equation by found vertices */
         int chosenVertex;
 
-        if(boost::out_degree(graphsops::getVertexAtIndexFromPropertyMap(maxPair.getCoverintPair().first, baseGraph), baseGraph) >
-                boost::out_degree(graphsops::getVertexAtIndexFromPropertyMap(maxPair.getCoverintPair().second, baseGraph), baseGraph)){
+        if(heuristicCriteria[maxPair.getCoverintPair().first].second  >
+                heuristicCriteria[maxPair.getCoverintPair().second].second ){
             chosenVertex = maxPair.getCoverintPair().first;
         } else {
             chosenVertex = maxPair.getCoverintPair().second;
@@ -157,6 +158,34 @@ QList<int> findMVCWithCoveringPairsMethod(UndirectedGraphType graph) {
     }
 
     return mvc;
+}
+
+std::vector<std::pair<int, int> > getHeuristicCriteria(const UndirectedGraphType &graph){
+    std::vector<std::pair<int, int> > hc(num_vertices(graph));
+
+    vertex_iter_t vertexItBegin, vertexItEnd, next;
+    boost::tie(vertexItBegin, vertexItEnd) = vertices(graph);
+
+    for (next = vertexItBegin; vertexItBegin != vertexItEnd; vertexItBegin = next) {
+        ++next;
+
+        const quint32 baseVertexIndex =  graphsops::getIndexOfVertex(*vertexItBegin, graph);
+        const quint32 baseVertexDegree = boost::out_degree(*vertexItBegin, graph);
+
+        int hCriterion;
+        UndirectedGraphType tempGraph = graph;
+
+        clear_vertex(graphsops::getVertexAtIndexFromPropertyMap(baseVertexIndex, tempGraph), tempGraph);
+
+        hCriterion = baseVertexDegree - num_edges(tempGraph);
+
+        std::pair<int, int> currentHC = std::make_pair(baseVertexIndex, hCriterion);
+
+        //index of a vertex is an index in the array
+        hc[baseVertexIndex] = currentHC;
+    }
+
+    return hc;
 }
 
 }
