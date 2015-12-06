@@ -4,9 +4,14 @@
 
 namespace graphsalgs {
 
-QList<int> findMVCWithConnectedTreeMethod(const UndirectedGraphType& graph) {
+QList<int> findMVCWithConnectedTreeMethod(UndirectedGraphType graph) {
 
     QList<int> mvc;
+
+    /*check whether we need to stop the algorithm */
+    if( num_edges(graph) == 0 ) {
+        return mvc;
+    }
 
     const quint32 verticesCount = boost::num_vertices(graph);
     const quint32 edgesCount = boost::num_edges(graph);

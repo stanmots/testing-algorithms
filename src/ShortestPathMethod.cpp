@@ -58,7 +58,7 @@ QList<int> findMVCWithShortestPathMethod(UndirectedGraphType graph) {
             vertex_desc_t vertexForRemoving;
             vertexForRemoving = graphsops::getVertexAtIndexFromPropertyMap(indexOfCurrentVertex, tempGraph);
 
-            graphsops::deleteAdjacentVertices(vertexForRemoving, tempGraph);
+            graphsops::clearAdjacentVertices(vertexForRemoving, tempGraph);
 
             while(isFunctionProcessed == false) {
 

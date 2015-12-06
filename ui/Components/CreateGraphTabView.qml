@@ -76,10 +76,6 @@ TabWidget {
                                 generateGraphButton.enabled = true
                             }
                         }
-
-                        onQuickValueChanged: {
-                            value = quickValue
-                        }
                     }
 
                     Text {
@@ -100,10 +96,6 @@ TabWidget {
                             if(generateGraphButton.enabled !== true) {
                                 generateGraphButton.enabled = true
                             }
-                        }
-
-                        onQuickValueChanged: {
-                            value = quickValue
                         }
                     }
                 }

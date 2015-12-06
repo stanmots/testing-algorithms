@@ -9,9 +9,6 @@
 
 namespace graphsalgs {
 
-//global minimum vertex cover container
-QList<int> GuaranteedPredictionV20Method_MVC;
-
 QList<int> findMVCWithGuaranteedPredictionV20Method(UndirectedGraphType graph) {
 
     static const QString kStepsStr = QObject::tr("Step");
@@ -23,7 +20,7 @@ QList<int> findMVCWithGuaranteedPredictionV20Method(UndirectedGraphType graph) {
 
     /*[1] check whether we need to stop the algorithm */
     if( num_edges(graph) == 0 ) {
-        return GuaranteedPredictionV20Method_MVC;
+        return AlgorithmPropertiesSingleton::getInstance().getMVCContainterRef();
     }
 
     AlgorithmPropertiesSingleton::getInstance().getAlgStepsRef().append("\r\n" + kStepsStr + " " + QString::number(stepsCount) + "\r\n\r\n");
@@ -63,7 +60,7 @@ QList<int> findMVCWithGuaranteedPredictionV20Method(UndirectedGraphType graph) {
             vertex_desc_t vertexForRemoving;
             vertexForRemoving = graphsops::getVertexAtIndexFromPropertyMap(indexOfCurrentVertex, tempGraph);
 
-            graphsops::deleteAdjacentVertices(vertexForRemoving, tempGraph);
+            graphsops::clearAdjacentVertices(vertexForRemoving, tempGraph);
 
             while(isFunctionProcessed == false) {
 
@@ -187,18 +184,18 @@ QList<int> findMVCWithGuaranteedPredictionV20Method(UndirectedGraphType graph) {
             if(graphsFunctions[indices[i]].second.getParenthesesCount() == 0) {
 
                 //found MVC
-                GuaranteedPredictionV20Method_MVC.append(graphsFunctions[indices[i]].second.getVariablesOutsideParentheses());
+                AlgorithmPropertiesSingleton::getInstance().getMVCContainterRef().append(graphsFunctions[indices[i]].second.getVariablesOutsideParentheses());
 
                 AlgorithmPropertiesSingleton::getInstance().getAlgStepsRef().append(kChosenFunctionStr + "f" + QString::number(graphsFunctions[indices[i]].first + 1) + "\r\n");
 
                 stepsCount = 0;
 
-                return GuaranteedPredictionV20Method_MVC;
+                return AlgorithmPropertiesSingleton::getInstance().getMVCContainterRef();
             }
         }
 
         /*[4.2] choose random function and remove all covered vertices */
-        GuaranteedPredictionV20Method_MVC.append(graphsFunctions[indices[0]].second.getVariablesOutsideParentheses());
+        AlgorithmPropertiesSingleton::getInstance().getMVCContainterRef().append(graphsFunctions[indices[0]].second.getVariablesOutsideParentheses());
         quint32 indexOfMainVertex = graphsFunctions[indices[0]].first;
         vertex_desc_t mainVertex = graphsops::getVertexAtIndexFromPropertyMap(indexOfMainVertex, graph);
         clear_vertex(mainVertex, graph);
@@ -217,10 +214,10 @@ QList<int> findMVCWithGuaranteedPredictionV20Method(UndirectedGraphType graph) {
 
     } else {
         //empty graph
-        return GuaranteedPredictionV20Method_MVC;
+        return AlgorithmPropertiesSingleton::getInstance().getMVCContainterRef();
     }
 
-    return GuaranteedPredictionV20Method_MVC;
+    return AlgorithmPropertiesSingleton::getInstance().getMVCContainterRef();
 }
 
 }

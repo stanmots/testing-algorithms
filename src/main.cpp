@@ -23,8 +23,10 @@ int main(int argc, char *argv[])
     view.createLangMenu();
 
     QProgressDialog *mainProgressDialog = new QProgressDialog(&view, Qt::FramelessWindowHint);
-    mainProgressDialog->setWindowModality(Qt::NonModal);
-    mainProgressDialog->setCancelButton(NULL);
+    mainProgressDialog->setWindowModality(Qt::WindowModal);
+
+    static const QString cancelButtonStr = QObject::tr("Cancel");
+    mainProgressDialog->setCancelButtonText(cancelButtonStr);
 
     qmlRegisterType<GraphsAlgorithmsSolver>("com.testsoft.graphs", 1, 0, "GraphSolver");
     view.rootContext()->setContextProperty(QLatin1String("mainTranslator"), (QObject *) &translationChanger);

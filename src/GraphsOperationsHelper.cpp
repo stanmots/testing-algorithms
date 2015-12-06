@@ -1,5 +1,7 @@
 #include "GraphsOperationsHelper.h"
+#include "AlgorithmPropertiesSingleton.h"
 
+#include <QString>
 
 namespace graphsops {
 
@@ -59,6 +61,18 @@ bool DoesEachVertexHaveSameDegree (const UndirectedGraphType& g) {
     return  isHPathFound;
 }
 
+quint32 removeVertexWithMaxDegree(UndirectedGraphType &graph) {
+
+    quint32 indexOfVertexWithMaxFrequency = graphsops::getMaxDegreeVertexIndex(graph);
+    vertex_desc_t maxFreqVertexForRemoving;
+    maxFreqVertexForRemoving = graphsops::getVertexAtIndexFromPropertyMap(indexOfVertexWithMaxFrequency, graph);
+
+    clear_vertex(maxFreqVertexForRemoving, graph);
+    remove_vertex(maxFreqVertexForRemoving, graph);
+
+    return indexOfVertexWithMaxFrequency;
+}
+
 void deleteVerticesWithoutEdges (UndirectedGraphType& graph) {
 
     vertex_iter_t vertexItBegin, vertexItEnd, next;
@@ -75,7 +89,7 @@ void deleteVerticesWithoutEdges (UndirectedGraphType& graph) {
 
 }
 
-void deleteAdjacentVertices (const vertex_desc_t& vertex, UndirectedGraphType& graph) {
+void clearAdjacentVertices (const vertex_desc_t& vertex, UndirectedGraphType& graph) {
     adj_iter_t adjItBegin, adjItEnd, next;
 
     tie(adjItBegin, adjItEnd) = adjacent_vertices(vertex, graph);
@@ -89,6 +103,11 @@ void deleteAdjacentVertices (const vertex_desc_t& vertex, UndirectedGraphType& g
 
 void addHangingVerticesToCover (QList<int>& vertexCoverList, UndirectedGraphType& graph) {
 
+    if( num_edges(graph) == 0 ) {
+        return;
+    }
+
+    static const QString kHangingVerticesStr = QObject::tr("Found hanging vertex: ");
     bool isNeedAnotherPass = true;
     vertex_iter_t vertexItBegin, vertexItEnd, next;
     adj_iter_t adjItBegin, adjItEnd;
@@ -111,6 +130,9 @@ void addHangingVerticesToCover (QList<int>& vertexCoverList, UndirectedGraphType
                 isNeedAnotherPass = true;
                 tie(adjItBegin, adjItEnd) = adjacent_vertices(*vertexItBegin, graph);
                 vertexCoverList.append(getIndexOfVertex(*adjItBegin, graph));
+
+                AlgorithmPropertiesSingleton::getInstance().getAlgStepsRef().append("\r\n" + kHangingVerticesStr + QString::number(getIndexOfVertex(*vertexItBegin, graph) + 1));
+
                 clear_vertex(*adjItBegin, graph);
                 remove_vertex(*vertexItBegin, graph);
                 break;

@@ -14,7 +14,12 @@ SOURCES += src/main.cpp \
     src/GuaranteedPredictionV20Method.cpp \
     src/FunctionPropertiesHolder.cpp \
     src/AlgorithmPropertiesSingleton.cpp \
-    src/ShortestPathMethod.cpp
+    src/ShortestPathMethod.cpp \
+    src/CoveringPairsMethod.cpp \
+    src/CoveringPairHolder.cpp \
+    src/CombinedMethod.cpp \
+    src/GreedyMethod.cpp \
+    src/BranchAndBoundExactAlgorithm.cpp
 
 RESOURCES += TestingAlgorithmsResources.qrc
 
@@ -56,6 +61,11 @@ HEADERS += \
     src/GuaranteedPredictionV20Method.h \
     src/FunctionPropertiesHolder.h \
     src/AlgorithmPropertiesSingleton.h \
-    src/ShortestPathMethod.h
+    src/ShortestPathMethod.h \
+    src/CoveringPairsMethod.h \
+    src/CoveringPairHolder.h \
+    src/CombinedMethod.h \
+    src/GreedyMethod.h \
+    src/BranchAndBoundExactAlgorithm.h
 
 INCLUDEPATH += "lib"

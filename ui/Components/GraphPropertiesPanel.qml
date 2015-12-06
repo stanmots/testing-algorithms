@@ -11,47 +11,18 @@ Rectangle {
         target: algorithmTestPanel
         onNeedUpdateStorageWithAlgorithmOutput: {
 
-            var algID = getAlgID(algType)
-
-            graphsListVisualModel.model.setProperty(graphsListView.currentIndex, "algorithm" + algID , calculatedResults)
-            graphsListVisualModel.model.setProperty(graphsListView.currentIndex, "exactnessOfResult" + algID, algorithmTestPanel.isSolutionExact)
-            graphsListVisualModel.model.setProperty(graphsListView.currentIndex, "exactResult" + algID , algorithmTestPanel.exactVertexCount)
-            graphsListVisualModel.model.setProperty(graphsListView.currentIndex, "shouldDisplay" + algID, algorithmTestPanel.shouldDisplayAlgResults)
+            graphsListVisualModel.model.setProperty(graphsListView.currentIndex, "algorithm" + algType , calculatedResults)
+            graphsListVisualModel.model.setProperty(graphsListView.currentIndex, "exactnessOfResult" + algType, algorithmTestPanel.isSolutionExact)
+            graphsListVisualModel.model.setProperty(graphsListView.currentIndex, "exactResult" + algType, algorithmTestPanel.exactVertexCoverSize)
+            graphsListVisualModel.model.setProperty(graphsListView.currentIndex, "shouldDisplay" + algType, algorithmTestPanel.shouldDisplayAlgResults)
 
             //need this due to a Qt's bug :(
-            var updateModel = graphsListVisualModel.model.get(graphsListView.currentIndex)["shouldDisplay" + algID]
+            var updateModel = graphsListVisualModel.model.get(graphsListView.currentIndex)["shouldDisplay" + algType]
         }
 
         onNeedUpdateTestPanelWithAlgorithmType: {
             udpateTestPanelText()
         }
-    }
-
-    function getAlgID(algType) {
-        var algID
-
-        switch(algType) {
-        case 0:
-            algID = "ShortestPath"
-            break
-        case 1:
-            algID = "GuaranteedPredictionTypeV20"
-            break
-        case 2:
-            algID = "OptType"
-            break
-        case 3:
-            algID = "CTreeType"
-            break
-        case 4:
-            algID = "GuaranteedPredictionType"
-            break
-        case 5:
-            algID = "StdType"
-            break
-        }
-
-        return algID
     }
 
     function udpateTestPanelText() {
@@ -60,21 +31,21 @@ Rectangle {
         algorithmTestPanel.solveAlgorithmButtonRef.enabled = true
         algorithmTestPanel.shouldDisplayAlgResults = false
 
-        var algID = getAlgID(algorithmTestPanel.algComboBoxRef.selectedIndex)
+        var algUniqueKey = algorithmTestPanel.algComboBoxRef.selectedIndex
 
-        if(graphsListVisualModel.model.get(graphsListView.currentIndex)["algorithm" + algID] !== undefined
-                && graphsListVisualModel.model.get(graphsListView.currentIndex)["algorithm" + algID] !== '') {
+        if(graphsListVisualModel.model.get(graphsListView.currentIndex)["algorithm" + algUniqueKey] !== undefined
+                && graphsListVisualModel.model.get(graphsListView.currentIndex)["algorithm" + algUniqueKey] !== '') {
 
-            algorithmTestPanel.algorithmDetailsAreaRef.text = graphsListVisualModel.model.get(graphsListView.currentIndex)["algorithm" + algID]
+            algorithmTestPanel.algorithmDetailsAreaRef.text = graphsListVisualModel.model.get(graphsListView.currentIndex)["algorithm" + algUniqueKey]
             algorithmTestPanel.solveAlgorithmButtonRef.enabled = false
-            algorithmTestPanel.shouldDisplayAlgResults = graphsListVisualModel.model.get(graphsListView.currentIndex)["shouldDisplay" + algID]
+            algorithmTestPanel.shouldDisplayAlgResults = graphsListVisualModel.model.get(graphsListView.currentIndex)["shouldDisplay" + algUniqueKey]
 
-            if(graphsListVisualModel.model.get(graphsListView.currentIndex)["exactnessOfResult" + algID] !== undefined) {
-                algorithmTestPanel.isSolutionExact = graphsListVisualModel.model.get(graphsListView.currentIndex)["exactnessOfResult" + algID]
+            if(graphsListVisualModel.model.get(graphsListView.currentIndex)["exactnessOfResult" + algUniqueKey] !== undefined) {
+                algorithmTestPanel.isSolutionExact = graphsListVisualModel.model.get(graphsListView.currentIndex)["exactnessOfResult" + algUniqueKey]
             }
 
-            if(graphsListVisualModel.model.get(graphsListView.currentIndex)["exactResult" + algID] !== undefined) {
-                algorithmTestPanel.exactVertexCount = graphsListVisualModel.model.get(graphsListView.currentIndex)["exactResult" + algID]
+            if(graphsListVisualModel.model.get(graphsListView.currentIndex)["exactResult" + algUniqueKey] !== undefined) {
+                algorithmTestPanel.exactVertexCoverSize = graphsListVisualModel.model.get(graphsListView.currentIndex)["exactResult" + algUniqueKey]
             }
         }
     }

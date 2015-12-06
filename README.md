@@ -6,7 +6,8 @@ Implementation of different algorithms for solving graph theory problems with te
 - Shortest Path Method;
 - Guaranteed Predictions Methods (2 versions);
 - Greedy algorithm (removing vertices with maximum degree);
-- Optimized Method based on the heuristic predictions.
+- Optimized Method based on the heuristic predictions;
+- Method based on the covering pairs searching;
 
 ###Each algorithm can be analyzed using such additional output:
 - Number of the operations performed by the algorithm;

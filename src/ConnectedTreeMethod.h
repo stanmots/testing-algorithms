@@ -11,7 +11,7 @@ struct ConnectedTree {
     quint32 nodeStage;
 };
 
-QList<int> findMVCWithConnectedTreeMethod (const UndirectedGraphType& graph);
+QList<int> findMVCWithConnectedTreeMethod (UndirectedGraphType graph);
 
 }
 

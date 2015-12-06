@@ -128,109 +128,109 @@
         <translation>Вершины</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="87"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="83"/>
         <source>Graph&apos;s Density</source>
         <comment>Set Graph&apos;s Density, title </comment>
         <translation>Плотность графа</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="117"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="109"/>
         <source>Generate a graph</source>
         <comment>Generate a graph button&apos;s title</comment>
         <translation>Генерировать граф</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="114"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="106"/>
         <source>Press this button to generate a graph with vertices count and density you&apos;ve set.</source>
         <comment>Generate a graph&apos;s tooltip</comment>
         <translation>Нажмите сюда, чтобы сгенерировать граф с заданным количеством вершин и плотностью.</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="139"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="131"/>
         <source>Set a graph manually</source>
         <comment>Manual graph tab&apos;s title</comment>
         <translation>Задать граф вручную</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="166"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="158"/>
         <source>An adjacency matrix is not set!</source>
         <comment>An adjacency matrix is not set, label</comment>
         <translation>Матрица смежности не задана!</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="167"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="159"/>
         <source>An adjacency matrix has been set!</source>
         <comment>An adjacency matrix has been set!, label</comment>
         <translation>Матрица смежности успешно задана!</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="181"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="173"/>
         <source>Set an adjacency matrix</source>
         <comment>Set an adjacency matrix button&apos;s title</comment>
         <translation>Задать матрицу смежности</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="178"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="170"/>
         <source>Press this button to set an adjacency matrix whereby you can create a graph.</source>
         <comment>Set an adjacency matrix button&apos;s tooltip</comment>
         <translation>Нажмите сюда, чтобы задать матрицу смежности, с помощью которой Вы сможете создать граф.</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="195"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="187"/>
         <source>Create a graph</source>
         <comment>Create a graph button&apos;s title</comment>
         <translation>Создать граф</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="192"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="184"/>
         <source>Press this button to create a graph from the adjacency matrix which you&apos;ve set using appropriate button.</source>
         <comment>Creat a graph button&apos;s tooltip</comment>
         <translation>Нажмите на эту кнопку, чтобы создать граф по матрице смежности, которую Вы задали.</translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="207"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="199"/>
         <source>Current Graph&apos;s properties:</source>
         <comment>Current Graphs&apos; properties:</comment>
         <translation>Свойства текущего графа: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="208"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="200"/>
         <source>Vertices: </source>
         <comment>Vertices: </comment>
         <translation>Вершины: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="209"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="201"/>
         <source>Edges: </source>
         <comment>Edges: </comment>
         <translation>Ребра: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="210"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="202"/>
         <source>Systems of the graph&apos;s equations: </source>
         <comment>Systems of the graph&apos;s equations</comment>
         <translation>Системы уравнений текущего графа: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="211"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="203"/>
         <source>Equation </source>
         <comment>Equation </comment>
         <translation>Уравнение </translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="212"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="204"/>
         <source>List of graph&apos;s edges: </source>
         <comment>List of graph&apos;s edges</comment>
         <translation>Список ребер графа: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="213"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="205"/>
         <source>Edge </source>
         <comment>Edge </comment>
         <translation>Ребро </translation>
     </message>
     <message>
-        <location filename="../ui/Components/CreateGraphTabView.qml" line="214"/>
+        <location filename="../ui/Components/CreateGraphTabView.qml" line="206"/>
         <source>Main equation: </source>
         <comment>main equation of the graph </comment>
         <translation>Главное уравнение графа:</translation>
@@ -297,37 +297,37 @@
         <translation>Начать тестирование</translation>
     </message>
     <message>
-        <location filename="../ui/Components/DeepTestingPage.qml" line="374"/>
+        <location filename="../ui/Components/DeepTestingPage.qml" line="383"/>
         <source>Testing graphs with the current parameters: </source>
         <translation>Тестирование сгенерированных графов с заданными параметрами: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/DeepTestingPage.qml" line="375"/>
+        <location filename="../ui/Components/DeepTestingPage.qml" line="384"/>
         <source>Frequency of the algorithm&apos;s errors: </source>
         <translation>Частота появления ошибок заданного метода: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/DeepTestingPage.qml" line="376"/>
+        <location filename="../ui/Components/DeepTestingPage.qml" line="385"/>
         <source>Number of operations: </source>
         <translation>Количество операций: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/DeepTestingPage.qml" line="377"/>
+        <location filename="../ui/Components/DeepTestingPage.qml" line="386"/>
         <source>Relative Errors: </source>
         <translation>Относительная ошибка: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/DeepTestingPage.qml" line="378"/>
+        <location filename="../ui/Components/DeepTestingPage.qml" line="387"/>
         <source>Exacution Probability: </source>
         <translation>Вероятность появления ошибки: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/DeepTestingPage.qml" line="379"/>
+        <location filename="../ui/Components/DeepTestingPage.qml" line="388"/>
         <source>Exacution Time, ms: </source>
         <translation>Время выполнения, мс: </translation>
     </message>
     <message>
-        <location filename="../ui/Components/DeepTestingPage.qml" line="380"/>
+        <location filename="../ui/Components/DeepTestingPage.qml" line="389"/>
         <source>Exacution Probability with allowed time (300 ms): </source>
         <translation>Вероятность выполнения за допустимое время (300 мс): </translation>
     </message>
@@ -335,32 +335,42 @@
 <context>
     <name>DropDownComboBox</name>
     <message>
+        <location filename="../ui/Components/DropDownComboBox.qml" line="7"/>
+        <source>Combined Method</source>
+        <translation>Комбинированный метод</translation>
+    </message>
+    <message>
         <location filename="../ui/Components/DropDownComboBox.qml" line="6"/>
+        <source>Covering Method based on global degree checking</source>
+        <translation>Метод с глобальной проверкой степени вершин</translation>
+    </message>
+    <message>
+        <location filename="../ui/Components/DropDownComboBox.qml" line="8"/>
         <source>Method with searching the shortest path</source>
         <translation>Метод с поиском кратчайшего пути</translation>
     </message>
     <message>
-        <location filename="../ui/Components/DropDownComboBox.qml" line="7"/>
+        <location filename="../ui/Components/DropDownComboBox.qml" line="9"/>
         <source>Method with the guaranteed prediction(Approximation type).</source>
         <translation>Метод на основе гарантированного прогнозирования(Приближенный вариант).</translation>
     </message>
     <message>
-        <location filename="../ui/Components/DropDownComboBox.qml" line="9"/>
+        <location filename="../ui/Components/DropDownComboBox.qml" line="11"/>
         <source>Method based on the connected tree graphs</source>
         <translation>Метод основанный на связном дереве</translation>
     </message>
     <message>
-        <location filename="../ui/Components/DropDownComboBox.qml" line="10"/>
+        <location filename="../ui/Components/DropDownComboBox.qml" line="12"/>
         <source>Method with guaranteed predictions</source>
         <translation>Метод на основе гарантированного прогнозирования</translation>
     </message>
     <message>
-        <location filename="../ui/Components/DropDownComboBox.qml" line="11"/>
+        <location filename="../ui/Components/DropDownComboBox.qml" line="13"/>
         <source>Greedy algorithm (deleting vertices with the max degree)</source>
         <translation>Жадный алгоритм (удаление вершин с максимальной степенью)</translation>
     </message>
     <message>
-        <location filename="../ui/Components/DropDownComboBox.qml" line="8"/>
+        <location filename="../ui/Components/DropDownComboBox.qml" line="10"/>
         <source>Optimized method with the heuristic prediction</source>
         <translation>Оптимизированный метод на основе эвристического прогнозирования</translation>
     </message>
@@ -401,15 +411,46 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/GuaranteedPredictionV20Method.cpp" line="17"/>
+        <location filename="../src/CoveringPairsMethod.cpp" line="14"/>
+        <location filename="../src/GuaranteedPredictionV20Method.cpp" line="14"/>
         <source>Step</source>
         <translation>Шаг</translation>
     </message>
     <message>
-        <location filename="../src/GuaranteedPredictionV20Method.cpp" line="18"/>
+        <location filename="../src/CoveringPairsMethod.cpp" line="16"/>
+        <source>Pairs with same max frequency: </source>
+        <translation>Пары вершин с одинаковой максимальной частотой: </translation>
+    </message>
+    <message>
+        <location filename="../src/CoveringPairsMethod.cpp" line="15"/>
+        <source>Chosen vertex: </source>
+        <translation>Выбранная вершина: </translation>
+    </message>
+    <message>
+        <location filename="../src/CoveringPairsMethod.cpp" line="17"/>
+        <source>Pairs with vertex </source>
+        <translation>Пары с вершиной </translation>
+    </message>
+    <message>
+        <location filename="../src/CoveringPairsMethod.cpp" line="18"/>
+        <source>Pairs of vertices with the corresponding degree: </source>
+        <translation>Пары вершин с соответствующей степенью: </translation>
+    </message>
+    <message>
+        <location filename="../src/GuaranteedPredictionV20Method.cpp" line="15"/>
         <location filename="../src/ShortestPathMethod.cpp" line="22"/>
         <source>Chosen function: </source>
         <translation>Выбранная функция: </translation>
+    </message>
+    <message>
+        <location filename="../src/GraphsOperationsHelper.cpp" line="98"/>
+        <source>Found hanging vertex: </source>
+        <translation>Найдена висячая вершина: </translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="28"/>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>

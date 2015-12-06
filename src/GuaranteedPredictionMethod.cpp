@@ -45,6 +45,7 @@ QList<int> findMVCWithGuaranteedPredictionMethod(UndirectedGraphType graph) {
         }
 
         if(maxTermsNumber == 0) {
+
             //found the minimum vertex cover
             quint32 finalCaseNumber = 0;
             quint32 minPartialCoverSize = listWithPredictionObjects.at(0)->m_partialVertexCover.size();
@@ -61,53 +62,6 @@ QList<int> findMVCWithGuaranteedPredictionMethod(UndirectedGraphType graph) {
 
         minimumVertexCoverList.append(listWithPredictionObjects.at(caseNumber)->m_partialVertexCover);
         graph = listWithPredictionObjects.at(caseNumber)->m_graph;
-
-        /*[7] check if the other equations are included in the equation
-        with the maximum terms number*/
-//        for(quint32 i = 0; i < 3; ++i) {
-//            if(i != caseNumber) {
-//                for(quint32 j = 0; j < listWithPredictionObjects.at(i)->m_equationSize; ++j) {
-//                    std::pair<quint32, quint32> currentPair = listWithPredictionObjects.at(i)->m_equation[j];
-//                    std::vector<std::pair<quint32, quint32> >::iterator it = std::find_if(listWithPredictionObjects.at(caseNumber)->m_equation.begin(),
-//                                                                                                     listWithPredictionObjects.at(caseNumber)->m_equation.end(),
-//                                                                                                     graphsops::MatchPairs(currentPair.first, currentPair.second));
-
-//                    if(it == listWithPredictionObjects.at(caseNumber)->m_equation.end()) {
-//                        qDebug()<<"test";
-//                        vertex_desc_t firstVertex = graphsops::getVertexAtIndexFromPropertyMap(currentPair.first, graph);
-//                        vertex_desc_t secondVertex = graphsops::getVertexAtIndexFromPropertyMap(currentPair.second, graph);
-//                        const quint32 firstVDegree = boost::out_degree(firstVertex, graph);
-//                        const quint32 secondVDegree = boost::out_degree(secondVertex, graph);
-//                        std::vector<quint32*> cVec;
-//                        cVec.push_back(&currentPair.first);
-//                        cVec.push_back(&currentPair.second);
-
-//                        quint32 vertexInVectorIndex = -1;
-//                        if(firstVDegree > secondVDegree) {
-//                            vertexInVectorIndex = 0;
-//                        } else {
-//                            vertexInVectorIndex = 1;
-//                        }
-
-//                        if(minimumVertexCoverList.contains(*cVec[vertexInVectorIndex]) == false) {
-//                             minimumVertexCoverList.append(*cVec[vertexInVectorIndex]);
-
-//                             switch (vertexInVectorIndex) {
-//                             case 0:
-//                                 boost::clear_vertex(firstVertex, graph);
-//                                 boost::remove_vertex(firstVertex, graph);
-//                                 break;
-//                             case 1:
-//                                 boost::clear_vertex(secondVertex, graph);
-//                                 boost::remove_vertex(secondVertex, graph);
-//                                 break;
-//                             }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
     }
 
     return QList<int>();

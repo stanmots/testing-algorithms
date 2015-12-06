@@ -18,14 +18,6 @@ ScrollArea {
         matrixScrollArea.visible = false
         isLoadingAdjMatrix = true
 
-        mainProgressDialog.setMaximum(Math.abs(adjacencyMatrixSize * adjacencyMatrixSize -
-                                               matrixView.rows * matrixView.columns))
-        if(mainProgressDialog.maximum > 40) {
-            mainProgressDialog.show()
-        } else {
-            mainProgressDialog.hide()
-        }
-
         matrixView.rows = adjacencyMatrixSize
         matrixView.columns = adjacencyMatrixSize
 
@@ -40,22 +32,6 @@ ScrollArea {
         height: childrenRect.height
 
         enabled: !isLoadingAdjMatrix
-
-        Connections {
-            id: progressConnection
-
-            target: matrixView
-            onProgressChanged: {
-                if(mainProgressDialog.wasCanceled === false) {
-                    m_progress +=1
-                    mainProgressDialog.setValue(m_progress)
-
-                    if(m_progress >= mainProgressDialog.maximum) {
-                        mainProgressDialog.hide()
-                    }
-                }
-            }
-        }
 
         Row {
             id: adjMatrixTitlesRow

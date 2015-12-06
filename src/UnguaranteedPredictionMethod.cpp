@@ -5,8 +5,9 @@
 namespace graphsalgs {
 
 std::pair<int, int> getMaxIndependentPair (const UndirectedGraphType& graph) {
+
     if(boost::num_vertices(graph) < 2) {
-        qDebug() << "Error! The number of vertices is too small!";
+        qDebug() << "Error! The number of vertices is too small for making pair!";
         return std::make_pair(-1, -1);
     }
 

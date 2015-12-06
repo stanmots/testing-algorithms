@@ -38,8 +38,9 @@ struct SortEdgesPredicate
 
 bool DoesEachVertexHaveSameDegree (const UndirectedGraphType& graph);
 void deleteVerticesWithoutEdges (UndirectedGraphType& graph);
-void deleteAdjacentVertices (const vertex_desc_t& vertex, UndirectedGraphType& graph);
+void clearAdjacentVertices(const vertex_desc_t& vertex, UndirectedGraphType& graph);
 void addHangingVerticesToCover (QList<int>& vertexCoverList, UndirectedGraphType& graph);
+quint32 removeVertexWithMaxDegree(UndirectedGraphType& graph);
 std::pair<quint32, quint32> getPairOfVerticesWithMaxDegree(const UndirectedGraphType& graph);
 PredictionStorage getZeroPairCase(std::pair<quint32, quint32> testPair, UndirectedGraphType graph);
 PredictionStorage getUnityPairCase(const quint32 zeroVertex, const quint32 unityVertex, UndirectedGraphType graph);
@@ -89,6 +90,39 @@ inline QSet<int> getAdjacentVertices(const vertex_desc_t& vertex, const Undirect
 
 }
 
+inline int getMaxDegreeVertexIndex(const UndirectedGraphType &graph) {
+
+    vertex_iter_t vertexItBegin, vertexItEnd, next;
+    boost::tie(vertexItBegin, vertexItEnd) = vertices(graph);
+
+    quint32 baseMaxDegree = boost::out_degree(*vertexItBegin, graph);
+    quint32 baseVertexIndex =  graphsops::getIndexOfVertex(*vertexItBegin, graph);
+    next = vertexItBegin;
+    ++next;
+    vertexItBegin = next;
+
+    for (; vertexItBegin != vertexItEnd; vertexItBegin = next) {
+        ++next;
+
+        const quint32 currentMaxDegree = boost::out_degree(*vertexItBegin, graph);
+        const quint32 currentVertexIndex =  graphsops::getIndexOfVertex(*vertexItBegin, graph);
+
+        if(baseMaxDegree < currentMaxDegree) {
+            baseMaxDegree = currentMaxDegree;
+            baseVertexIndex = currentVertexIndex;
+        }
+    }
+
+    return baseVertexIndex;
+}
+
+inline bool areVerticesAdjacent(const quint32 v1, const quint32 v2, const UndirectedGraphType& graph) {
+
+    QSet<int> adjVerticesOfV1 = graphsops::getAdjacentVertices(getVertexAtIndexFromPropertyMap(v1, graph), graph);
+
+    return adjVerticesOfV1.contains(v2);
+}
+
 inline void findIndependentEdges (std::multiset<quint32>& independentEdgesContainer, quint32& edgesCount, const UndirectedGraphType& graph ) {
 
 edge_iter_t edgeIterBegin, edgeIterEnd;
@@ -107,6 +141,17 @@ for (; edgeIterBegin != edgeIterEnd; ++edgeIterBegin)  {
     ++edgesCount;
 }
 
+}
+
+inline void intializeVertexIndexProperties(UndirectedGraphType& graph) {
+
+    vertex_iter_t i, iend;
+    boost::property_map<UndirectedGraphType, boost::vertex_index_t>::type indexMap = get(boost::vertex_index, graph);
+
+    int c = 0;
+    for (boost::tie(i, iend) = vertices(graph); i != iend; ++i, ++c) {
+        indexMap[*i] = c;
+    }
 }
 
 }

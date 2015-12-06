@@ -12,46 +12,17 @@ Rectangle {
     property alias algorithmDetailsAreaRef: algorithmDetailsArea
     property alias solveAlgorithmButtonRef: solveAlgorithmButton
     property alias algorithmResultsIndicatorRef: algorithmResultsIndicator
-    property int staticVertexCoverCount: 1
     property string minimumVertexCoverText: ""
-    property string allVertexCoversText: ""
 
     property bool isSolutionExact: false
-    property bool isNeededAllVCOutput: false
     property bool shouldDisplayAlgResults: false
-    property int exactVertexCount: 0
     property int numberOfVerticesInMinimumCover: 0
 
-    //for translation
-    property string numOfVertInCover: qsTr("Number of vertices in cover ") + mainTranslator.emptyString
-    property string coverFromVert: qsTr("Cover from the vertex ") + mainTranslator.emptyString
-    property string allMinVertCovers: qsTr("All minimal vertex covers of the current graph:") + mainTranslator.emptyString
-
+    property int exactVertexCoverSize: 0
+    property variant exactSolution:[]
 
     signal needUpdateStorageWithAlgorithmOutput (string calculatedResults, int algType)
     signal needUpdateTestPanelWithAlgorithmType ()
-
-    Connections {
-        target: mainGraphClass
-        onCollectingVertexCoversFinished: {
-            algorithmFinished()
-        }
-        onFoundNewVertexCover:{
-            if(isNeededAllVCOutput == true) {
-                //var sortedVertexCover = vertexCover.sort(function(a, b){return a-b});
-
-                if(allVertexCoversText == "") {
-                    allVertexCoversText += "\r\n" + "\r\n" + allMinVertCovers
-                }
-
-                allVertexCoversText += "\r\n" + "\r\n" + coverFromVert + staticVertexCoverCount.toString() + ": "+ mainTranslator.emptyString
-
-                allVertexCoversText += convertVerticesInCoverListToText(vertexCover)
-                allVertexCoversText += "\r\n" + numOfVertInCover + staticVertexCoverCount.toString() + ": " + vertexCover.length.toString()
-                ++staticVertexCoverCount
-            }
-        }
-    }
 
     Rectangle {
         id: rightBorderRect
@@ -163,7 +134,7 @@ Rectangle {
                 anchors.centerIn: parent
                 font.bold: true
                 font.family: "Verdana, sans-serif"
-                text: isSolutionExact === false ? qsTr("Algorithm output is not exact! Correct cover size is: ") + exactVertexCount.toString() + mainTranslator.emptyString:
+                text: isSolutionExact === false ? qsTr("Algorithm output is not exact! Correct cover size is: ") + exactVertexCoverSize.toString() + mainTranslator.emptyString:
                                                   qsTr("Congratulations! Algorithm output is exact!") + mainTranslator.emptyString
             }
         }
@@ -221,12 +192,16 @@ Rectangle {
         var verticesCount = mainGraphClass.getVerticesSizeForCurrentGraph(currentGraphIndex)
 
         if(verticesCount < 1) {
-            mainGraphClass.clearOldValues()
             outputText += emptyGraphStr
             minimumVertexCoverText = outputText
             algorithmFinished()
             return
         }
+
+        //find exact solution for the current Graph
+        var currentExactSolution = mainGraphClass.findExactSolutionForCurrentGraph(currentGraphIndex)
+        exactSolution = currentExactSolution
+        exactVertexCoverSize = exactSolution.length
 
         //find the minimum vertex cover
         var minimumVertexCoverList = mainGraphClass.solveAlgorithmForCurrentGraph(algComboBox.selectedIndex,currentGraphIndex)
@@ -242,15 +217,13 @@ Rectangle {
             outputText += convertVerticesInCoverListToText(minimumVertexCoverList)
             minimumVertexCoverText = outputText
 
-            //next we need to find all vertex covers of the current Graph
-            mainGraphClass.getAllVertexCoversOfCurrentGraph(currentGraphIndex)
-
         } else {
-            mainGraphClass.clearOldValues()
             outputText += noVertInCoverStr
             minimumVertexCoverText = outputText
-            algorithmFinished()
+            exactSolution = []
         }
+
+        algorithmFinished()
     }
 
     function convertVerticesInCoverListToText (vertexCoverList) {
@@ -268,16 +241,13 @@ Rectangle {
     }
 
     function checkIfSolutionExact() {
-        var arrayOfCoversLengths = mainGraphClass.getArrayOfCoversLengths()
-        if(arrayOfCoversLengths.length === 0) {
+
+        if(exactSolution.length === 0) {
             return "empty"
         }
 
-        for(var i = 0; i < arrayOfCoversLengths.length; ++i) {
-            if(arrayOfCoversLengths[i] < numberOfVerticesInMinimumCover) {
-                exactVertexCount = arrayOfCoversLengths[i]
-                return "approx"
-            }
+        if(exactSolution.length < numberOfVerticesInMinimumCover) {
+            return "approx"
         }
 
         return "exact"
@@ -286,17 +256,13 @@ Rectangle {
     function algorithmFinished() {
         var algResults = minimumVertexCoverText
 
-        if(isNeededAllVCOutput == true) {
-            algResults += allVertexCoversText
-        }
-
         var solutionType = ""
 
         switch (checkIfSolutionExact()) {
             case "exact":
                 solutionType = "exact"
+                exactVertexCoverSize = 0
                 isSolutionExact = true
-                exactVertexCount = 0
                 shouldDisplayAlgResults = true
                 break;
             case "approx":
@@ -310,15 +276,14 @@ Rectangle {
                 break;
         }
 
-        var exactSolution = mainGraphClass.getExactSolution()
-
         if(exactSolution.length > 0 && solutionType.localeCompare("empty") !== 0) {
 
             var sortedExactSolution = exactSolution.sort(function(a, b){return a-b});
+            var exactSolutionCount = exactSolution.length
 
             algResults += "\r\n" + "\r\n" + exactSolutionStr
             algResults += convertVerticesInCoverListToText(sortedExactSolution)
-            algResults += "\r\n" + exactSolutionLengthStr + exactSolution.length.toString() + "\r\n" + "\r\n"
+            algResults += "\r\n" + exactSolutionLengthStr + exactSolutionCount.toString() + "\r\n" + "\r\n"
 
             //additional alg info
             algResults += algInfoStr + "\r\n"
@@ -332,9 +297,8 @@ Rectangle {
         needUpdateStorageWithAlgorithmOutput(algResults, algComboBox.selectedIndex)
 
         //reset property values
-        allVertexCoversText = ""
-        staticVertexCoverCount = 1
         solveAlgorithmButton.enabled = false
         numberOfVerticesInMinimumCover = 0
+        exactSolution = []
     }
 }

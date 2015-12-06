@@ -371,6 +371,15 @@ Rectangle {
         }
     }
 
+    Connections {
+        target: mainProgressDialog
+        onCanceled: {
+            isCanceled = true
+        }
+    }
+
+    property bool isCanceled: false
+
     property string testOutputTitle: qsTr("Testing graphs with the current parameters: ") + mainTranslator.emptyString
     property string errorsFrequency: qsTr("Frequency of the algorithm's errors: ") + mainTranslator.emptyString
     property string numberOfOperationsStr: qsTr("Number of operations: ") + mainTranslator.emptyString
@@ -378,6 +387,7 @@ Rectangle {
     property string exacutionProbabilityStr: qsTr("Exacution Probability: ") + mainTranslator.emptyString
     property string exacutionTimeStr: qsTr("Exacution Time, ms: ") + mainTranslator.emptyString
     property string exacutionProbabilityWithAllowedTimeStr: qsTr("Exacution Probability with allowed time (300 ms): ") + mainTranslator.emptyString
+
 
     //private functions
     function repeat(str, count) {
@@ -392,6 +402,8 @@ Rectangle {
     }
 
     function getTestingOutput() {
+
+        isCanceled = false
 
         var MAX_DIGITS_NUMBER_FREQ = 7
         var MAX_DIGITS_NUMBER_NUMOPS = 10
@@ -466,6 +478,11 @@ Rectangle {
 
                 for(var t = 0; t < testsCountSpinBox.value; ++t) {
 
+                    if(isCanceled === true) {
+                        cancelOperations()
+                        return
+                    }
+
                     ++progress
                     mainProgressDialog.setValue(progress)
 
@@ -473,27 +490,23 @@ Rectangle {
                     var calculatedEdges = Math.round(v * (v - 1) * 0.5 * d/100)
                     singleGraphTab.mainGraphClassRef.generateGraph(v, calculatedEdges)
 
+                    //[2] Find exact solution
+                    var exactSolution = singleGraphTab.mainGraphClassRef.findExactSolutionForCurrentGraph(gIndex)
 
-                    //[2] Find the minimum vertex cover
+                    //[3] Find the minimum vertex cover
                     var gIndex = singleGraphTab.mainGraphClassRef.getCurrentGraphsCount() - 1
 
                     if(startTime === 0) startTime = new Date().getTime()
                     var minimumVertexCoverList = singleGraphTab.mainGraphClassRef.solveAlgorithmForCurrentGraph(algType.selectedIndex, gIndex)
                     if(endTime === 0) endTime = new Date().getTime() - startTime
 
-                    //[3] Find all minimum vertex covers
-                    singleGraphTab.mainGraphClassRef.getAllVertexCoversOfCurrentGraph(gIndex, false)
-
-                    //[4] Check if the algorithm's output is exact
-                    var arrayOfCoversLengths = singleGraphTab.mainGraphClassRef.getArrayOfCoversLengths()
-                    for(var i = 0; i < arrayOfCoversLengths.length; ++i) {
-                        if(arrayOfCoversLengths[i] < minimumVertexCoverList.length) {
-                            //error is found
-                            ++errorsCount
-                            if(relativeErrors === 0) relativeErrors = +(Math.abs(minimumVertexCoverList.length - arrayOfCoversLengths[i])/arrayOfCoversLengths[i]).toFixed(MAX_DIGITS_NUMBER_OTHERS-2)
-                            break
-                        }
+                    //[4] Check if the algorithm's output is exact                 
+                    if(minimumVertexCoverList.length > exactSolution.length) {
+                        //error is found
+                        ++errorsCount
+                        if(relativeErrors === 0) relativeErrors = +(Math.abs(minimumVertexCoverList.length - exactSolution.length)/exactSolution.length).toFixed(MAX_DIGITS_NUMBER_OTHERS-2)
                     }
+
                     //[4.1] Get number of operations
                     numberOfOperations += singleGraphTab.mainGraphClassRef.getNumberOfOperations()
 
@@ -536,10 +549,18 @@ Rectangle {
                 exacutionTimeOutput + "\r\n\r\n" +
                 exacutionProbabilityWithAllowedTimeOutput
 
-        mainProgressDialog.hide()
         graphDetailsArea.text = testOutput
+        finishCalculatingTestingOutput()
+    }
 
+    function finishCalculatingTestingOutput() {
+        mainProgressDialog.hide()
         configureTestingPanel.enabled = true
         startTestButton.enabled = true
+    }
+
+    function cancelOperations() {
+        graphDetailsArea.text = ""
+        finishCalculatingTestingOutput()
     }
 }
